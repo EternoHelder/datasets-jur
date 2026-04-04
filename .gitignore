@@ -1,0 +1,32 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Ambientes virtuais Python
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Arquivos de dados sensíveis (não versionados)
+*.key
+*.secret
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Arquivos compactados grandes (adicionar manualmente se necessário)
+# *.zip
+# *.tar.gz
