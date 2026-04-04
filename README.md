@@ -51,4 +51,4 @@ Para manter a qualidade do material:
 
 ## Licença
 
-Este projeto está licenciado sob a licença Apache 2.0. Consulte `/home/runner/work/datasets-jur/datasets-jur/LICENSE`.
+Este projeto está licenciado sob a licença Apache 2.0. Consulte `LICENSE`.
