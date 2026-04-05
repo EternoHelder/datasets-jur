@@ -1,0 +1,33 @@
+# Dados baixados — não versionar (podem ser centenas de GB)
+dados/stj/espelhos/**/*.json
+dados/stj/espelhos/**/*.zip
+dados/stj/precedentes_qualificados/*.csv
+dados/datajud/**/*.jsonl
+dados/academico/**/*.parquet
+dados/academico/**/*.tar.xz
+dados/academico/**/*.jsonl
+
+# Manter a estrutura de pastas
+!dados/**/.gitkeep
+
+# Logs e artefatos de execução
+*.log
+falhas.txt
+reprocessados/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# VSCode / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
