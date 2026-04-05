@@ -15,11 +15,13 @@ datasets-jur/
 ├── scripts/
 │   ├── download_stj_academicos.sh   # Download STJ + corpora acadêmicos
 │   ├── download_datajud.py          # Coleta via API pública DataJud/CNJ
-│   └── retentar_falhas.sh           # Reprocessa downloads com falha
+│   ├── retentar_falhas.sh           # Reprocessa downloads com falha
+│   └── upload_to_dify.py            # Envia docs/dados como fonte no Dify
 ├── docs/
 │   ├── fontes.md                    # Detalhamento de cada fonte de dados
 │   ├── schema.md                    # Esquema dos campos por dataset
-│   └── datajud_classes.md           # Tabela de classes e assuntos CNJ utilizados
+│   ├── datajud_classes.md           # Tabela de classes e assuntos CNJ utilizados
+│   └── dify_integracao.md           # Guia de integração com o Dify (RAG)
 ├── dados/
 │   ├── stj/
 │   │   ├── espelhos/                # Acórdãos mensais por turma (JSON)
@@ -185,6 +187,53 @@ for f in glob.glob('dados/stj/espelhos/**/*.json', recursive=True):
         except json.JSONDecodeError as e:
             print(f"ERRO: {f} — {e}")
 ```
+
+---
+
+## Integração com o Dify (Knowledge Base)
+
+O [Dify](https://dify.ai/) é uma plataforma open-source para construção de
+aplicações LLM com suporte a RAG. Este repositório inclui um script para
+enviar automaticamente a documentação e os dados coletados como base de
+conhecimento no Dify.
+
+### Pré-requisitos Dify
+
+```bash
+# Instalar o Dify localmente (Docker)
+git clone https://github.com/langgenius/dify.git
+cd dify/docker && cp .env.example .env && docker compose up -d
+# Acesse http://localhost e crie uma conta
+```
+
+Obtenha a API Key em **Configurações → API Keys** (tipo Dataset).
+
+### Enviar documentação para o Dify
+
+```bash
+# Apenas a documentação do repositório (README + docs/)
+python3 scripts/upload_to_dify.py \
+    --api-key SUA_CHAVE_DIFY \
+    --base-url http://localhost/v1 \
+    --apenas-docs
+```
+
+### Enviar dados coletados + documentação
+
+```bash
+# Primeiro colete os dados, depois envie tudo
+python3 scripts/upload_to_dify.py \
+    --api-key SUA_CHAVE_DIFY \
+    --base-url http://localhost/v1
+```
+
+### Verificar antes de enviar (dry-run)
+
+```bash
+python3 scripts/upload_to_dify.py --api-key SUA_CHAVE_DIFY --dry-run
+```
+
+> Para o guia completo, veja [`docs/dify_integracao.md`](docs/dify_integracao.md).
 
 ---
 
